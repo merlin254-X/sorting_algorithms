@@ -46,4 +46,17 @@ void quicksort_recursive(int *array, int low, int high, size_t size);
 int lomuto_partition(int *array, int low, int high, size_t size);
 
 void shell_sort(int *array, size_t size);
+
+/*task 5*/
+void cocktail_sort_list(listint_t **list);
+void swap_nodes(listint_t **list, listint_t **k1, listint_t *k2);
+
+
+void counting_sort(int *array, size_t size);
+
+void merge_sort(int *array, size_t size);
+
+void heap_sort(int *array, size_t size);
+
+void radix_sort(int *array, size_t size);
 #endif

@@ -1,44 +1,65 @@
 #include "sort.h"
 
 /**
- * shell_sort - Sorts an array of integers in ascending order
- *               using the Shell sort algorithm with Knuth sequence.
- * @array: The array to be sorted.
- * @size: The size of the array.
+ * swap_nodes - Swap two nodes in a listint_t doubly-linked list.
+ * @list: A pointer to the head of the doubly-linked list.
+ * @a: A pointer to the first node to swap.
+ * @b: The second node to swap.
  */
-void shell_sort(int *array, size_t size)
+void swap_nodes(listint_t **list, listint_t *a, listint_t *b)
 {
-	size_t gap = 1, i, j;
-	int temp;
+	if (a->prev != NULL)
+		a->prev->next = b;
+	else
+		*list = b;
 
-	if (array == NULL || size < 2)
+	if (b->next != NULL)
+		b->next->prev = a;
+
+	a->next = b->next;
+	b->prev = a->prev;
+	b->next = a;
+	a->prev = b;
+}
+
+/**
+ * cocktail_sort_list - Sorts a doubly linked list of integers in ascending
+ *						order using the Cocktail shaker sort algorithm.
+ * @list: A pointer to the head of the doubly linked list.
+ */
+void cocktail_sort_list(listint_t **list)
+{
+	int swapped;
+	listint_t *current, *tail;
+
+	if (list == NULL || *list == NULL || (*list)->next == NULL)
 		return;
 
-	/* Find the largest gap in Knuth sequence less than or equal to size */
-	while (gap <= size / 3)
-		gap = gap * 3 + 1;
-
-	while (gap > 0)
-	{
-		for (i = gap; i < size; i++)
+	do {
+		swapped = 0;
+		for (current = *list; current->next != NULL; current = current->next)
 		{
-			temp = array[i];
-
-			/* Shift elements that are greater than temp to the right */
-			for (j = i; j >= gap && array[j - gap] > temp; j -= gap)
+			if (current->n > current->next->n)
 			{
-				array[j] = array[j - gap];
+				swap_nodes(list, current, current->next);
+				print_list(*list);
+				swapped = 1;
 			}
-
-			/* Insert temp at its correct position */
-			array[j] = temp;
 		}
 
-		/* Print array after each decrease in interval (gap) */
-		print_array(array, size);
+		if (!swapped)
+			break;
 
-		/* Move to the next gap in Knuth sequence */
-		gap = (gap - 1) / 3;
-	}
+		swapped = 0;
+		for (tail = current; tail->prev != NULL; tail = tail->prev)
+		{
+			if (tail->n < tail->prev->n)
+			{
+				swap_nodes(list, tail->prev, tail);
+				print_list(*list);
+				swapped = 1;
+			}
+		}
+	} while (swapped);
 }
 
