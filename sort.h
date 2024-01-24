@@ -5,10 +5,15 @@
 #include <stdlib.h>
 
 /*enum bool - Enumeration of boolean values*/
+/**
+ * enum bool - Enumeration of boolean values
+ * @false: Represents the logical value "false" or "0"
+ * @true: Represents the logical value "true" or "1"
+ */
 typedef enum bool
 {
-    false = 0,
-    true
+	false = 0,
+	true
 } bool;
 
 /*Helper for swapping*/
@@ -23,9 +28,9 @@ void swap_ints(int *a, int *b);
  */
 typedef struct listint_s
 {
-		const int n;
-		struct listint_s *prev;
-		struct listint_s *next;
+				const int n;
+				struct listint_s *prev;
+				struct listint_s *next;
 } listint_t;
 
 /* functions */
