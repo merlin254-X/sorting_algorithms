@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/*enum bool - Enumeration of boolean values*/
+/*enum bool - Enumeration on boolean values*/
 /**
  * enum bool - Enumeration of boolean values
  * @false: Represents the logical value "false" or "0"
